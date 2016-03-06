@@ -5,6 +5,7 @@ import java.util.Collections;
 import java.util.List;
 import java.util.PriorityQueue;
 import java.util.Scanner;
+import java.util.stream.Collectors;
 
 /**
  * Runs a number of algorithms that try to fit files onto disks.
@@ -76,15 +77,18 @@ public class Bins {
 	}
 
 	private void printQueue() {
-		// TODO Auto-generated method stub
-		while (!pq.isEmpty()) {
-			System.out.println(pq.poll());
-		}
+//		while (!pq.isEmpty()) {
+//			System.out.println(pq.poll());
+//		}
+		pq.stream().forEach(p -> {
+			System.out.println(p);
+		});
 		System.out.println();
 	}
 
 	private void printReverseFit() {
-		Collections.sort(data, Collections.reverseOrder());
+		data = data.stream().sorted((f1, f2) -> Long.compare(f2, f1)).collect(Collectors.toList());
+//		Collections.sort(data, Collections.reverseOrder());
 		createDiskBins();
 		System.out.println();
 		System.out.println("worst-fit decreasing method");
